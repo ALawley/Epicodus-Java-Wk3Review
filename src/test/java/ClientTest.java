@@ -81,4 +81,16 @@ public class ClientTest {
     Client savedClient = Client.find(testClient.getId());
     assertEquals(savedClient.getStylistId(), testStylist.getId());
   }
+
+  @Test
+  public void clearStylist_removesAssignedStylistFromClient() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testClient.save();
+    testStylist.save();
+    testClient.addStylist(testStylist.getId());
+    testClient.clearStylist();
+    Client savedClient = Client.find(testClient.getId());
+    assertEquals(0, savedClient.getStylistId());
+  }
 }
