@@ -170,4 +170,16 @@ public class ClientTest {
     testStylist.save();
     assertEquals("Coloring", testClient.serviceMatchPrint(testStylist.getId()));
   }
+
+  @Test
+  public void getStylistMatches_returnsAllStylistsWithMatches() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    Stylist testStylist2 = new Stylist("April", 32, 4);
+    testClient.save();
+    testStylist.save();
+    testStylist2.save();
+    assertTrue(testClient.getStylistMatches().contains(testStylist));
+    assertFalse(testClient.getStylistMatches().contains(testStylist2));
+  }
 }

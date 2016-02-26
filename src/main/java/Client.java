@@ -142,6 +142,16 @@ public class Client {
     return matches;
   }
 
+  public ArrayList<Stylist> getStylistMatches() {
+    ArrayList<Stylist> matches = new ArrayList<Stylist>();
+    for (Stylist stylist : Stylist.all()) {
+      if (this.getServiceMatches(stylist.getId()).size() > 0 && this.getAvailabilityMatches(stylist.getId()).size() > 0) {
+        matches.add(stylist);
+      }
+    }
+    return matches;
+  }
+
   public String availabilityPrint() {
     ArrayList<Integer> availabilities = this.getAvailabilityArray();
     String result = "";
@@ -235,10 +245,6 @@ public class Client {
     }
     return result;
   }
-
-
-
-
 
   //UPDATE
   public void updateName(String newName) {
