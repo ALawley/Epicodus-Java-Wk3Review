@@ -9,7 +9,65 @@ public class ClientTest {
   public DatabaseRule database = new DatabaseRule();
 
   @Test
-  public void method_input_result() {
-    // eventually put your testing code here
+  public void all_emptyAtFirst() {
+    assertEquals(Client.all().size(), 0);
+  }
+
+  @Test
+  public void save_addsClientToList() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    testClient.save();
+    assertEquals(1, Client.all().size());
+  }
+
+  @Test
+  public void updateName_changesClientName() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    testClient.save();
+    testClient.updateName("Jonathan");
+    Client savedClient = Client.find(testClient.getId());
+    assertEquals("Jonathan", savedClient.getName());
+  }
+
+  @Test
+  public void updateAvailability_changesClientAvailability() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    testClient.save();
+    testClient.updateAvailability(19);
+    Client savedClient = Client.find(testClient.getId());
+    assertEquals(19, savedClient.getAvailability());
+  }
+
+  @Test
+  public void updateServices_changesClientServices() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    testClient.save();
+    testClient.updateServices(2);
+    Client savedClient = Client.find(testClient.getId());
+    assertEquals(2, savedClient.getServices());
+  }
+
+  @Test
+  public void updatePhone_changesClientPhone() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    testClient.save();
+    testClient.updatePhone("(333) 333-3333");
+    Client savedClient = Client.find(testClient.getId());
+    assertEquals("(333) 333-3333", savedClient.getPhone());
+  }
+
+  @Test
+  public void delete_deleteClient() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    testClient.save();
+    testClient.delete();
+    assertEquals(0, Client.all().size());
+  }
+
+  @Test
+  public void find_getClientById() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    testClient.save();
+    assertEquals(Client.find(testClient.getId()), testClient);
   }
 }
