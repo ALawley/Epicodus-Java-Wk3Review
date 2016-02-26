@@ -54,6 +54,34 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/clients", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("clients", Client.all());
+      model.put("template", "templates/clients.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/clients", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int availabilityValue = 0;
+      int servicesValue = 0;
+      String[] availabilities = request.queryParamsValues("availability");
+      for (String availability : availabilities) {
+        availabilityValue += Integer.parseInt(availability);
+      }
+      String[] services = request.queryParamsValues("service");
+      for (String service : services) {
+        servicesValue += Integer.parseInt(service);
+      }
+      String clientName = request.queryParams("name");
+      String clientPhone = request.queryParams("phone");
+      Client newClient = new Client(clientName, availabilityValue, servicesValue, clientPhone);
+      newClient.save();
+      model.put("clients", Client.all());
+      model.put("template", "templates/clients.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     post("/clear", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       Client.deleteAll();

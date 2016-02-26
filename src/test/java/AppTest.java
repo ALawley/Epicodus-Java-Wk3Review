@@ -43,6 +43,26 @@ public class AppTest extends FluentTest {
   }
 
   @Test
+  public void stylistDisplaysClientsTest() {
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    testClient.save();
+    testClient.addStylist(testStylist.getId());
+    String stylistPath = String.format("http://localhost:4567/stylists/%d", testStylist.getId());
+    goTo(stylistPath);
+    assertThat(pageSource()).contains("(555) 555-5555");
+  }
+
+  @Test
+  public void clientDisplayTest() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    testClient.save();
+    goTo("http://localhost:4567/clients");
+    assertThat(pageSource()).contains("Max");
+  }
+
+  @Test
   public void deleteAllTest() {
     Stylist testStylist = new Stylist("Erika", 18, 3);
     testStylist.save();

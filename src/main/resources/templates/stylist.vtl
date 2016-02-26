@@ -3,13 +3,15 @@
 </div>
 
 <h2>$stylist.getName()</h2>
-<h3>Availability: </h3><h5>$stylist.availabilityPrint()</h5>
-<h3>Services Offered: </h3><h5>$stylist.servicePrint()</h5>
+<h3>Availability:</h3>
+<h5>$stylist.availabilityPrint()</h5>
+<h3>Services Offered:</h3>
+<h5>$stylist.servicePrint()</h5>
 
 <h3>Here is a list of all your clients:</h3>
 <ul>
   #foreach($client in $clients)
-    <li>$client.getName() - Requesting $client.serviceMatchPrint() on $client.serviceAvailabilityPrint()</li>
+    <li>$client.getName() - Requesting $client.serviceMatchPrint() on $client.serviceAvailabilityPrint(). Phone: $client.getPhone()</li>
   #end
 </ul>
 
