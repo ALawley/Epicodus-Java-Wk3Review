@@ -101,8 +101,8 @@ public class Client {
     return availabilities;
   }
 
-  public ArrayList<Integer> availabilityMatches() {
-    Stylist assignedStylist = Stylist.find(stylist_id);
+  public ArrayList<Integer> availabilityMatches(int idOfStylist) {
+    Stylist assignedStylist = Stylist.find(idOfStylist);
     ArrayList<Integer> matches = new ArrayList<Integer>();
     for (int clientOpening : this.availabilityArray()) {
       for (int stylistOpening : assignedStylist.availabilityArray()) {

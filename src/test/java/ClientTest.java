@@ -114,10 +114,8 @@ public class ClientTest {
     Stylist testStylist = new Stylist("Erika", 18, 3);
     testClient.save();
     testStylist.save();
-    testClient.addStylist(testStylist.getId());
     ArrayList<Integer> testAvailabilities = new ArrayList<Integer>();
     testAvailabilities.add(2);
-    Client savedClient = Client.find(testClient.getId());
-    assertEquals(testAvailabilities, savedClient.availabilityMatches());
+    assertEquals(testAvailabilities, testClient.availabilityMatches(testStylist.getId()));
   }
 }
