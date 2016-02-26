@@ -1,6 +1,7 @@
 import org.sql2o.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Stylist {
   private int id;
@@ -95,6 +96,34 @@ public class Stylist {
       counter /=2;
     }
     return availabilities;
+  }
+
+  public static String availabilityPrint(ArrayList<Integer> availabilities) {
+    String result = "";
+    HashMap<Integer, String> availValues = new HashMap<Integer, String>();
+    availValues.put(1, "Monday Daytime");
+    availValues.put(2, "Monday Evening");
+    availValues.put(4, "Tuesday Daytime");
+    availValues.put(8, "Tuesday Evening");
+    availValues.put(16, "Wednesday Daytime");
+    availValues.put(32, "Wednesday Evening");
+    availValues.put(64, "Thursday Daytime");
+    availValues.put(128, "Thursday Evening");
+    availValues.put(256, "Friday Daytime");
+    availValues.put(512, "Friday Evening");
+    availValues.put(1024, "Saturday Daytime");
+    availValues.put(2048, "Saturday Evening");
+    availValues.put(4096, "Sunday Daytime");
+    availValues.put(8192, "Sunday Evening");
+
+    for (int avail : availabilities) {
+      if (result == "") {
+        result = availValues.get(avail);
+      } else {
+        result = availValues.get(avail) + ", " + result;
+      }
+    }
+    return result;
   }
 
   public ArrayList<Integer> getServiceArray() {

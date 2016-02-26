@@ -74,6 +74,14 @@ public class StylistTest {
   }
 
   @Test
+  public void availabilityPrint_convertsAvailabilityNumbersToString() {
+    ArrayList<Integer> testAvailabilities = new ArrayList<Integer>();
+    testAvailabilities.add(16);
+    testAvailabilities.add(2);
+    assertEquals("Monday Evening, Wednesday Daytime", Stylist.availabilityPrint(testAvailabilities));
+  }
+
+  @Test
   public void getServiceArray_returnsArrayofServiceValues() {
     Stylist testStylist = new Stylist("Erika", 18, 3);
     testStylist.save();
