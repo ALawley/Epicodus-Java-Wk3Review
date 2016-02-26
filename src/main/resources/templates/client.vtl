@@ -1,0 +1,12 @@
+<div class="jumbotron">
+  <h1>Salon Booker</h1>
+</div>
+
+<h3>Hello, $client.getName()</h3>
+<h5>Based on you needing the following services: $client.servicePrint() and having the following times available: $client.availabilityPrint(), we've recommended the following stylists:</h5>
+
+<ul>
+  #foreach($stylist in $matchedstylists)
+    <li>$stylist.getName() - Available for $client.serviceMatchPrint($stylist.getId()) on $client.availabilityMatchPrint($stylist.getId()).</li>
+  #end
+</ul>
