@@ -2,6 +2,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.sql2o.*;
 import java.util.Arrays;
+import java.util.ArrayList;
 
 public class StylistTest {
 
@@ -60,5 +61,15 @@ public class StylistTest {
     Stylist testStylist = new Stylist("Erika", 18, 3);
     testStylist.save();
     assertEquals(Stylist.find(testStylist.getId()), testStylist);
+  }
+
+  @Test
+  public void availabilityArray_returnsArrayofAvailabilityValues() {
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    ArrayList<Integer> testAvailabilities = new ArrayList<Integer>();
+    testAvailabilities.add(16);
+    testAvailabilities.add(2);
+    assertEquals(testAvailabilities, testStylist.availabilityArray());
   }
 }

@@ -2,6 +2,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.sql2o.*;
 import java.util.Arrays;
+import java.util.ArrayList;
 
 public class ClientTest {
 
@@ -92,5 +93,31 @@ public class ClientTest {
     testClient.clearStylist();
     Client savedClient = Client.find(testClient.getId());
     assertEquals(0, savedClient.getStylistId());
+  }
+
+  @Test
+  public void availabilityArray_returnsArrayofAvailabilityValues() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    testClient.save();
+    ArrayList<Integer> testAvailabilities = new ArrayList<Integer>();
+    testAvailabilities.add(64);
+    testAvailabilities.add(8);
+    testAvailabilities.add(4);
+    testAvailabilities.add(2);
+    testAvailabilities.add(1);
+    assertEquals(testAvailabilities, testClient.availabilityArray());
+  }
+
+  @Test
+  public void availabilityMatches_returnsAvailabilitesSharedWithStylist() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testClient.save();
+    testStylist.save();
+    testClient.addStylist(testStylist.getId());
+    ArrayList<Integer> testAvailabilities = new ArrayList<Integer>();
+    testAvailabilities.add(2);
+    Client savedClient = Client.find(testClient.getId());
+    assertEquals(testAvailabilities, savedClient.availabilityMatches());
   }
 }

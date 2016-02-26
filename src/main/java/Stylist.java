@@ -1,5 +1,6 @@
 import org.sql2o.*;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Stylist {
   private int id;
@@ -64,6 +65,29 @@ public class Stylist {
     }
   }
 
+  public static Stylist find(int id) {
+    String sql = "SELECT * FROM stylists WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Stylist.class);
+    }
+  }
+
+  public ArrayList<Integer> availabilityArray() {
+    int counter = 8192;
+    int availScore = availability;
+    ArrayList<Integer> availabilities = new ArrayList<Integer>();
+    while (availScore > 0) {
+      if(availScore >= counter) {
+        availabilities.add(counter);
+        availScore -= counter;
+      }
+      counter /=2;
+    }
+    return availabilities;
+  }
+
   //UPDATE
   public void updateName(String newName) {
     try (Connection con = DB.sql2o.open()) {
@@ -101,16 +125,6 @@ public class Stylist {
       con.createQuery(sql)
         .addParameter("id", id)
         .executeUpdate();
-    }
-  }
-
-
-  public static Stylist find(int id) {
-    String sql = "SELECT * FROM stylists WHERE id = :id";
-    try(Connection con = DB.sql2o.open()) {
-      return con.createQuery(sql)
-        .addParameter("id", id)
-        .executeAndFetchFirst(Stylist.class);
     }
   }
 }

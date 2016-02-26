@@ -1,5 +1,6 @@
 import org.sql2o.*;
 import java.util.List;
+import java.util.ArrayList;
 
 public class Client {
   private int id;
@@ -85,6 +86,34 @@ public class Client {
         .executeAndFetchFirst(Client.class);
     }
   }
+
+  public ArrayList<Integer> availabilityArray() {
+    int counter = 8192;
+    int availScore = availability;
+    ArrayList<Integer> availabilities = new ArrayList<Integer>();
+    while (availScore > 0) {
+      if(availScore >= counter) {
+        availabilities.add(counter);
+        availScore -= counter;
+      }
+      counter /=2;
+    }
+    return availabilities;
+  }
+
+  public ArrayList<Integer> availabilityMatches() {
+    Stylist assignedStylist = Stylist.find(stylist_id);
+    ArrayList<Integer> matches = new ArrayList<Integer>();
+    for (int clientOpening : this.availabilityArray()) {
+      for (int stylistOpening : assignedStylist.availabilityArray()) {
+        if (clientOpening == stylistOpening) {
+          matches.add(clientOpening);
+        }
+      }
+    }
+    return matches;
+  }
+
 
   //UPDATE
   public void updateName(String newName) {
