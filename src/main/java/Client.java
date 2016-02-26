@@ -37,6 +37,10 @@ public class Client {
     return phone;
   }
 
+  public int getStylistId() {
+    return stylist_id;
+  }
+
   @Override
   public boolean equals(Object otherClient){
     if (!(otherClient instanceof Client)) {
@@ -130,6 +134,16 @@ public class Client {
       return con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Client.class);
+    }
+  }
+
+  public void addStylist(int stylist_id) {
+    try (Connection con = DB.sql2o.open()) {
+    String sql = "UPDATE clients SET stylist_id = :stylist_id WHERE id = :id";
+    con.createQuery(sql)
+      .addParameter("stylist_id", stylist_id)
+      .addParameter("id", id)
+      .executeUpdate();
     }
   }
 }

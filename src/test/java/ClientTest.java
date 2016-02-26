@@ -70,4 +70,15 @@ public class ClientTest {
     testClient.save();
     assertEquals(Client.find(testClient.getId()), testClient);
   }
+
+  @Test
+  public void addStylist_assignStylistToClient() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testClient.save();
+    testStylist.save();
+    testClient.addStylist(testStylist.getId());
+    Client savedClient = Client.find(testClient.getId());
+    assertEquals(savedClient.getStylistId(), testStylist.getId());
+  }
 }
