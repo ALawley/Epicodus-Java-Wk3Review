@@ -1,10 +1,12 @@
 import org.junit.*;
 import static org.junit.Assert.*;
+import org.sql2o.*;
+import java.util.Arrays;
 
-public class ClassTest {
-  
-  // @Rule
-  // public ClearRule clearRule = new ClearRule();
+public class ClientTest {
+
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
 
   @Test
   public void method_input_result() {
