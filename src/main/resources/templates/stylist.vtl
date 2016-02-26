@@ -7,12 +7,14 @@
 <h5>$stylist.availabilityPrint()</h5>
 <h3>Services Offered:</h3>
 <h5>$stylist.servicePrint()</h5>
-
+#if($clients.size() > 0)
 <h3>Here is a list of all your clients:</h3>
 <ul>
   #foreach($client in $clients)
     <li>$client.getName() - Requesting $client.serviceMatchPrint() on $client.serviceAvailabilityPrint(). Phone: $client.getPhone()</li>
   #end
 </ul>
-
+#else
+<h3>Currently no clients are assigned to you. Check back later for more business</h3>
+#end
 <a class="btn btn-info" href="/">Back to home</a>
