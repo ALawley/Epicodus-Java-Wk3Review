@@ -87,7 +87,7 @@ public class Client {
     }
   }
 
-  public ArrayList<Integer> availabilityArray() {
+  public ArrayList<Integer> getAvailabilityArray() {
     int counter = 8192;
     int availScore = availability;
     ArrayList<Integer> availabilities = new ArrayList<Integer>();
@@ -101,13 +101,40 @@ public class Client {
     return availabilities;
   }
 
-  public ArrayList<Integer> availabilityMatches(int idOfStylist) {
+  public ArrayList<Integer> getAvailabilityMatches(int idOfStylist) {
     Stylist assignedStylist = Stylist.find(idOfStylist);
     ArrayList<Integer> matches = new ArrayList<Integer>();
-    for (int clientOpening : this.availabilityArray()) {
-      for (int stylistOpening : assignedStylist.availabilityArray()) {
+    for (int clientOpening : this.getAvailabilityArray()) {
+      for (int stylistOpening : assignedStylist.getAvailabilityArray()) {
         if (clientOpening == stylistOpening) {
           matches.add(clientOpening);
+        }
+      }
+    }
+    return matches;
+  }
+
+  public ArrayList<Integer> getServiceArray() {
+    int counter = 2;
+    int serviceScore = services_requested;
+    ArrayList<Integer> allServices = new ArrayList<Integer>();
+    while (serviceScore > 0) {
+      if(serviceScore >= counter) {
+        allServices.add(counter);
+        serviceScore -= counter;
+      }
+      counter /=2;
+    }
+    return allServices;
+  }
+
+  public ArrayList<Integer> getServiceMatches(int idOfStylist) {
+    Stylist assignedStylist = Stylist.find(idOfStylist);
+    ArrayList<Integer> matches = new ArrayList<Integer>();
+    for (int clientRequest : this.getServiceArray()) {
+      for (int stylistService : assignedStylist.getServiceArray()) {
+        if (clientRequest == stylistService) {
+          matches.add(clientRequest);
         }
       }
     }

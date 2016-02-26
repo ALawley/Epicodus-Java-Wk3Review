@@ -74,7 +74,7 @@ public class Stylist {
     }
   }
 
-  public ArrayList<Integer> availabilityArray() {
+  public ArrayList<Integer> getAvailabilityArray() {
     int counter = 8192;
     int availScore = availability;
     ArrayList<Integer> availabilities = new ArrayList<Integer>();
@@ -86,6 +86,20 @@ public class Stylist {
       counter /=2;
     }
     return availabilities;
+  }
+
+  public ArrayList<Integer> getServiceArray() {
+    int counter = 2;
+    int serviceScore = services;
+    ArrayList<Integer> allServices = new ArrayList<Integer>();
+    while (serviceScore > 0) {
+      if(serviceScore >= counter) {
+        allServices.add(counter);
+        serviceScore -= counter;
+      }
+      counter /=2;
+    }
+    return allServices;
   }
 
   //UPDATE

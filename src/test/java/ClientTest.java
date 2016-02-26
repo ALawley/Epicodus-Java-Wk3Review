@@ -96,7 +96,7 @@ public class ClientTest {
   }
 
   @Test
-  public void availabilityArray_returnsArrayofAvailabilityValues() {
+  public void getAvailabilityArray_returnsArrayofAvailabilityValues() {
     Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
     testClient.save();
     ArrayList<Integer> testAvailabilities = new ArrayList<Integer>();
@@ -105,17 +105,37 @@ public class ClientTest {
     testAvailabilities.add(4);
     testAvailabilities.add(2);
     testAvailabilities.add(1);
-    assertEquals(testAvailabilities, testClient.availabilityArray());
+    assertEquals(testAvailabilities, testClient.getAvailabilityArray());
   }
 
   @Test
-  public void availabilityMatches_returnsAvailabilitesSharedWithStylist() {
+  public void getAvailabilityMatches_returnsAvailabilitesSharedWithStylist() {
     Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
     Stylist testStylist = new Stylist("Erika", 18, 3);
     testClient.save();
     testStylist.save();
     ArrayList<Integer> testAvailabilities = new ArrayList<Integer>();
     testAvailabilities.add(2);
-    assertEquals(testAvailabilities, testClient.availabilityMatches(testStylist.getId()));
+    assertEquals(testAvailabilities, testClient.getAvailabilityMatches(testStylist.getId()));
+  }
+
+  @Test
+  public void getServiceArray_returnsArrayofServiceValues() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    testClient.save();
+    ArrayList<Integer> testServices = new ArrayList<Integer>();
+    testServices.add(2);
+    assertEquals(testServices, testClient.getServiceArray());
+  }
+
+  @Test
+  public void getServiceMatches_returnsServicesSharedWithStylist() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testClient.save();
+    testStylist.save();
+    ArrayList<Integer> testServices = new ArrayList<Integer>();
+    testServices.add(2);
+    assertEquals(testServices, testClient.getServiceMatches(testStylist.getId()));
   }
 }

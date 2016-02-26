@@ -64,12 +64,22 @@ public class StylistTest {
   }
 
   @Test
-  public void availabilityArray_returnsArrayofAvailabilityValues() {
+  public void getAvailabilityArray_returnsArrayofAvailabilityValues() {
     Stylist testStylist = new Stylist("Erika", 18, 3);
     testStylist.save();
     ArrayList<Integer> testAvailabilities = new ArrayList<Integer>();
     testAvailabilities.add(16);
     testAvailabilities.add(2);
-    assertEquals(testAvailabilities, testStylist.availabilityArray());
+    assertEquals(testAvailabilities, testStylist.getAvailabilityArray());
+  }
+
+  @Test
+  public void getServiceArray_returnsArrayofServiceValues() {
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    ArrayList<Integer> testServices = new ArrayList<Integer>();
+    testServices.add(2);
+    testServices.add(1);
+    assertEquals(testServices, testStylist.getServiceArray());
   }
 }
