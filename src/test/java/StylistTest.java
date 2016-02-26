@@ -48,6 +48,14 @@ public class StylistTest {
   }
 
   @Test
+  public void delete_deleteStylist() {
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    testStylist.delete();
+    assertEquals(0, Stylist.all().size());
+  }
+
+  @Test
   public void find_getStylistById() {
     Stylist testStylist = new Stylist("Erika", 18, 3);
     testStylist.save();
