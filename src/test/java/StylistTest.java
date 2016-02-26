@@ -82,4 +82,17 @@ public class StylistTest {
     testServices.add(1);
     assertEquals(testServices, testStylist.getServiceArray());
   }
+
+  @Test
+  public void getClients_returnsAllClientsAssignedToStylist() {
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    Client testClient2 = new Client("Sarah", 8134, 5, "(555) 555-5555");
+    testClient.save();
+    testClient2.save();
+    testClient.addStylist(testStylist.getId());
+    testClient2.addStylist(testStylist.getId());
+    assertEquals(2, testStylist.getClients().size());
+  }
 }

@@ -115,7 +115,7 @@ public class Client {
   }
 
   public ArrayList<Integer> getServiceArray() {
-    int counter = 2;
+    int counter = 4;
     int serviceScore = services_requested;
     ArrayList<Integer> allServices = new ArrayList<Integer>();
     while (serviceScore > 0) {

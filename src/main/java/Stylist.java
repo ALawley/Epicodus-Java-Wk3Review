@@ -74,6 +74,15 @@ public class Stylist {
     }
   }
 
+  public List<Client> getClients() {
+    String sql = "SELECT * FROM clients WHERE stylist_id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetch(Client.class);
+    }
+  }
+
   public ArrayList<Integer> getAvailabilityArray() {
     int counter = 8192;
     int availScore = availability;
@@ -89,7 +98,7 @@ public class Stylist {
   }
 
   public ArrayList<Integer> getServiceArray() {
-    int counter = 2;
+    int counter = 4;
     int serviceScore = services;
     ArrayList<Integer> allServices = new ArrayList<Integer>();
     while (serviceScore > 0) {
