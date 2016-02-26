@@ -3,12 +3,16 @@
 </div>
 
 <h3>Hello, $client.getName()</h3>
-#if($matchedstylists.size)
+#if($matchedstylists.size() > 0)
 <h5>Based on you needing the following services: $client.servicePrint() and having the following times available: $client.availabilityPrint(), we've recommended the following stylists:</h5>
 
 <ul>
   #foreach($stylist in $matchedstylists)
-    <li>$stylist.getName() - Available for $client.serviceMatchPrint($stylist.getId()) on $client.availabilityMatchPrint($stylist.getId()).</li>
+    <li>
+      $stylist.getName() - Available for  $client.serviceMatchPrint($stylist.getId()) on $client.availabilityMatchPrint($stylist.getId()).
+      <form action="/clients/$id/book/$stylist.getId()" method="post">
+      <button type="submit" id="clear" class="btn btn-success">Book $stylist.getName()</button>
+    </form></li>
   #end
 </ul>
 #else

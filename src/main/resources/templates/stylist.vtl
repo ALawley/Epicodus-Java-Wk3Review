@@ -11,7 +11,7 @@
 <h3>Here is a list of all your clients:</h3>
 <ul>
   #foreach($client in $clients)
-    <li>$client.getName() - Requesting $client.serviceMatchPrint() on $client.serviceAvailabilityPrint(). Phone: $client.getPhone()</li>
+    <li>$client.getName() - Requesting $client.serviceMatchPrint($stylist.getId()) on $client.availabilityMatchPrint($stylist.getId()). Phone: $client.getPhone()</li>
   #end
 </ul>
 #else
