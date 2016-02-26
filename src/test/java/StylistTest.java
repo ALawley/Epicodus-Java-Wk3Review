@@ -82,6 +82,14 @@ public class StylistTest {
   }
 
   @Test
+  public void servicePrint_convertsServiceNumbersToString() {
+    ArrayList<Integer> testServices = new ArrayList<Integer>();
+    testServices.add(2);
+    testServices.add(1);
+    assertEquals("Haircut, Coloring", Stylist.servicePrint(testServices));
+  }
+
+  @Test
   public void getServiceArray_returnsArrayofServiceValues() {
     Stylist testStylist = new Stylist("Erika", 18, 3);
     testStylist.save();

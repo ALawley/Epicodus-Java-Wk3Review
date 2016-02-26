@@ -126,6 +126,23 @@ public class Stylist {
     return result;
   }
 
+  public static String servicePrint(ArrayList<Integer> serviceIds) {
+    String result = "";
+    HashMap<Integer, String> serviceValues = new HashMap<Integer, String>();
+    serviceValues.put(1, "Haircut");
+    serviceValues.put(2, "Coloring");
+    serviceValues.put(4, "Perm");
+
+    for (int serviceId : serviceIds) {
+      if (result == "") {
+        result = serviceValues.get(serviceId);
+      } else {
+        result = serviceValues.get(serviceId) + ", " + result;
+      }
+    }
+    return result;
+  }
+
   public ArrayList<Integer> getServiceArray() {
     int counter = 4;
     int serviceScore = services;
