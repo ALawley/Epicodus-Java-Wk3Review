@@ -3,6 +3,7 @@
 </div>
 
 <h3>Hello, $client.getName()</h3>
+#if($matchedstylists.size)
 <h5>Based on you needing the following services: $client.servicePrint() and having the following times available: $client.availabilityPrint(), we've recommended the following stylists:</h5>
 
 <ul>
@@ -10,3 +11,7 @@
     <li>$stylist.getName() - Available for $client.serviceMatchPrint($stylist.getId()) on $client.availabilityMatchPrint($stylist.getId()).</li>
   #end
 </ul>
+#else
+<h5>We're sorry, but we currently don't have any stylists able to meet your needs. Either broaden your search or try again later.</h5>
+#end
+<a class="btn btn-info" href="/">Back to home</a>
