@@ -13,12 +13,17 @@ public class StylistTest {
     assertEquals(Stylist.all().size(), 0);
   }
 
-
-
   @Test
   public void save_addsStylistToList() {
     Stylist testStylist = new Stylist("Erika", 18, 3);
     testStylist.save();
     assertEquals(1, Stylist.all().size());
+  }
+
+  @Test
+  public void find_getStylistById() {
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    assertEquals(Stylist.find(testStylist.getId()), testStylist);
   }
 }
