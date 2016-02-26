@@ -2,44 +2,15 @@
   <h1>Salon Booker</h1>
 </div>
 
-<h3>Select yourself from the list of stylists below, or add yourself as a new stylist if you're not yet listed:</h3>
+<h2>$stylist.getName()</h2>
+<h3>Availability: </h3><h5>$stylist.availabilityPrint()</h5>
+<h3>Services Offered: </h3><h5>$stylist.servicePrint()</h5>
+
+<h3>Here is a list of all your clients:</h3>
 <ul>
-  #foreach($stylist in $stylists)
-    <li><a href="/stylist/$stylist.getId()">$stylist.getName()</a></li>
+  #foreach($client in $clients)
+    <li>$client.getName() - Requesting $client.serviceMatchPrint() on $client.serviceAvailabilityPrint()</li>
   #end
 </ul>
 
-<form action="/stylist" method="post">
-
-  <div class="form-group">
-    <label for="name">Name:</label>
-    <input id="name" name="name" type="text" class="form-control">
-  </div>
-
-  <div class="form-group">
-    <label>Availability:</label>
-    <label class="checkbox-inline"><input class="availability" type="checkbox" value="1">Monday Daytime</label>
-    <label class="checkbox-inline"><input class="availability" type="checkbox" value="2">Monday Evening</label>
-    <label class="checkbox-inline"><input class="availability" type="checkbox" value="4">Tuesday Daytime</label>
-    <label class="checkbox-inline"><input class="availability" type="checkbox" value="8">Tuesday Evening</label>
-    <label class="checkbox-inline"><input class="availability" type="checkbox" value="16">Wednesday Daytime</label>
-    <label class="checkbox-inline"><input class="availability" type="checkbox" value="32">Wednesday Evening</label>
-    <label class="checkbox-inline"><input class="availability" type="checkbox" value="64">Thursday Daytime</label>
-    <label class="checkbox-inline"><input class="availability" type="checkbox" value="128">Thursday Evening</label>
-    <label class="checkbox-inline"><input class="availability" type="checkbox" value="256">Friday Daytime</label>
-    <label class="checkbox-inline"><input class="availability" type="checkbox" value="512">Friday Evening</label>
-    <label class="checkbox-inline"><input class="availability" type="checkbox" value="1024">Saturday Daytime</label>
-    <label class="checkbox-inline"><input class="availability" type="checkbox" value="2048">Saturday Evening</label>
-    <label class="checkbox-inline"><input class="availability" type="checkbox" value="4096">Sunday Daytime</label>
-    <label class="checkbox-inline"><input class="availability" type="checkbox" value="8192">Sunday Evening</label>
-  </div>
-
-  <div class="form-group">
-    <label>Services Offered:</label>
-    <label class="checkbox-inline"><input class="service" type="checkbox" value="1">Haircut</label>
-    <label class="checkbox-inline"><input class="service" type="checkbox" value="2">Coloring</label>
-    <label class="checkbox-inline"><input class="service" type="checkbox" value="4">Perm</label>
-  </div>
-
-  <button type="submit" class="btn btn-success" id="addstylist">Register</button>
-</form>
+<a class="btn btn-info" href="/">Back to home</a>

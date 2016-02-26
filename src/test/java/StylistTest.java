@@ -75,18 +75,16 @@ public class StylistTest {
 
   @Test
   public void availabilityPrint_convertsAvailabilityNumbersToString() {
-    ArrayList<Integer> testAvailabilities = new ArrayList<Integer>();
-    testAvailabilities.add(16);
-    testAvailabilities.add(2);
-    assertEquals("Monday Evening, Wednesday Daytime", Stylist.availabilityPrint(testAvailabilities));
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    assertEquals("Monday Evening, Wednesday Daytime", testStylist.availabilityPrint());
   }
 
   @Test
   public void servicePrint_convertsServiceNumbersToString() {
-    ArrayList<Integer> testServices = new ArrayList<Integer>();
-    testServices.add(2);
-    testServices.add(1);
-    assertEquals("Haircut, Coloring", Stylist.servicePrint(testServices));
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    assertEquals("Haircut, Coloring", testStylist.servicePrint());
   }
 
   @Test

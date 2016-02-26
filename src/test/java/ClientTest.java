@@ -138,4 +138,36 @@ public class ClientTest {
     testServices.add(2);
     assertEquals(testServices, testClient.getServiceMatches(testStylist.getId()));
   }
+
+  @Test
+  public void availabilityPrint_convertsAvailabilityNumbersToString() {
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    assertEquals("Monday Evening, Wednesday Daytime", testStylist.availabilityPrint());
+  }
+
+  @Test
+  public void servicePrint_convertsServiceNumbersToString() {
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    assertEquals("Haircut, Coloring", testStylist.servicePrint());
+  }
+
+  @Test
+  public void availabilityMatchPrint_printsAllAvailabilitiesMatchedBetweenClientAndStylist() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testClient.save();
+    testStylist.save();
+    assertEquals("Monday Evening", testClient.availabilityMatchPrint(testStylist.getId()));
+  }
+
+  @Test
+  public void serviceMatchPrint_printsAllServicesMatchedBetweenClientAndStylist() {
+    Client testClient = new Client("Max", 79, 2, "(555) 555-5555");
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testClient.save();
+    testStylist.save();
+    assertEquals("Coloring", testClient.serviceMatchPrint(testStylist.getId()));
+  }
 }

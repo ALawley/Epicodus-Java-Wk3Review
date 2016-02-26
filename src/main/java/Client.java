@@ -1,6 +1,7 @@
 import org.sql2o.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Client {
   private int id;
@@ -140,6 +141,103 @@ public class Client {
     }
     return matches;
   }
+
+  public String availabilityPrint() {
+    ArrayList<Integer> availabilities = this.getAvailabilityArray();
+    String result = "";
+    HashMap<Integer, String> availValues = new HashMap<Integer, String>();
+    availValues.put(1, "Monday Daytime");
+    availValues.put(2, "Monday Evening");
+    availValues.put(4, "Tuesday Daytime");
+    availValues.put(8, "Tuesday Evening");
+    availValues.put(16, "Wednesday Daytime");
+    availValues.put(32, "Wednesday Evening");
+    availValues.put(64, "Thursday Daytime");
+    availValues.put(128, "Thursday Evening");
+    availValues.put(256, "Friday Daytime");
+    availValues.put(512, "Friday Evening");
+    availValues.put(1024, "Saturday Daytime");
+    availValues.put(2048, "Saturday Evening");
+    availValues.put(4096, "Sunday Daytime");
+    availValues.put(8192, "Sunday Evening");
+
+    for (int avail : availabilities) {
+      if (result == "") {
+        result = availValues.get(avail);
+      } else {
+        result = availValues.get(avail) + ", " + result;
+      }
+    }
+    return result;
+  }
+
+  public String availabilityMatchPrint(int idOfStylist) {
+    ArrayList<Integer> availabilities = this.getAvailabilityMatches(idOfStylist);
+    String result = "";
+    HashMap<Integer, String> availValues = new HashMap<Integer, String>();
+    availValues.put(1, "Monday Daytime");
+    availValues.put(2, "Monday Evening");
+    availValues.put(4, "Tuesday Daytime");
+    availValues.put(8, "Tuesday Evening");
+    availValues.put(16, "Wednesday Daytime");
+    availValues.put(32, "Wednesday Evening");
+    availValues.put(64, "Thursday Daytime");
+    availValues.put(128, "Thursday Evening");
+    availValues.put(256, "Friday Daytime");
+    availValues.put(512, "Friday Evening");
+    availValues.put(1024, "Saturday Daytime");
+    availValues.put(2048, "Saturday Evening");
+    availValues.put(4096, "Sunday Daytime");
+    availValues.put(8192, "Sunday Evening");
+
+    for (int avail : availabilities) {
+      if (result == "") {
+        result = availValues.get(avail);
+      } else {
+        result = availValues.get(avail) + ", " + result;
+      }
+    }
+    return result;
+  }
+
+  public String servicePrint() {
+    ArrayList<Integer> serviceIds = this.getServiceArray();
+    String result = "";
+    HashMap<Integer, String> serviceValues = new HashMap<Integer, String>();
+    serviceValues.put(1, "Haircut");
+    serviceValues.put(2, "Coloring");
+    serviceValues.put(4, "Perm");
+
+    for (int serviceId : serviceIds) {
+      if (result == "") {
+        result = serviceValues.get(serviceId);
+      } else {
+        result = serviceValues.get(serviceId) + ", " + result;
+      }
+    }
+    return result;
+  }
+
+  public String serviceMatchPrint(int idOfStylist) {
+    ArrayList<Integer> serviceIds = this.getServiceMatches(idOfStylist);
+    String result = "";
+    HashMap<Integer, String> serviceValues = new HashMap<Integer, String>();
+    serviceValues.put(1, "Haircut");
+    serviceValues.put(2, "Coloring");
+    serviceValues.put(4, "Perm");
+
+    for (int serviceId : serviceIds) {
+      if (result == "") {
+        result = serviceValues.get(serviceId);
+      } else {
+        result = serviceValues.get(serviceId) + ", " + result;
+      }
+    }
+    return result;
+  }
+
+
+
 
 
   //UPDATE

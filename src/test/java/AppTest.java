@@ -29,7 +29,16 @@ public class AppTest extends FluentTest {
   public void stylistDisplayTest() {
     Stylist testStylist = new Stylist("Erika", 18, 3);
     testStylist.save();
-    goTo("http://localhost:4567/stylist");
+    goTo("http://localhost:4567/stylists");
     assertThat(pageSource()).contains("Erika");
+  }
+
+  @Test
+  public void stylistAddedTest() {
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    String stylistPath = String.format("http://localhost:4567/stylists/%d", testStylist.getId());
+    goTo(stylistPath);
+    assertThat(pageSource()).contains("Monday Evening, Wednesday Daytime");
   }
 }

@@ -98,7 +98,8 @@ public class Stylist {
     return availabilities;
   }
 
-  public static String availabilityPrint(ArrayList<Integer> availabilities) {
+  public String availabilityPrint() {
+    ArrayList<Integer> availabilities = this.getAvailabilityArray();
     String result = "";
     HashMap<Integer, String> availValues = new HashMap<Integer, String>();
     availValues.put(1, "Monday Daytime");
@@ -126,7 +127,8 @@ public class Stylist {
     return result;
   }
 
-  public static String servicePrint(ArrayList<Integer> serviceIds) {
+  public String servicePrint() {
+    ArrayList<Integer> serviceIds = this.getServiceArray();
     String result = "";
     HashMap<Integer, String> serviceValues = new HashMap<Integer, String>();
     serviceValues.put(1, "Haircut");
