@@ -41,4 +41,14 @@ public class AppTest extends FluentTest {
     goTo(stylistPath);
     assertThat(pageSource()).contains("Monday Evening, Wednesday Daytime");
   }
+
+  @Test
+  public void deleteAllTest() {
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    goTo("http://localhost:4567/");
+    submit("#clear");
+    goTo("http://localhost:4567/stylists");
+    assertThat(pageSource()).doesNotContain("Erika");
+  }
 }

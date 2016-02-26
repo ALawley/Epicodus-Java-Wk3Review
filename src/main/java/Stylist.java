@@ -198,4 +198,11 @@ public class Stylist {
         .executeUpdate();
     }
   }
+
+  public static void deleteAll() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM stylists *";
+      con.createQuery(sql).executeUpdate();
+    }
+  }
 }

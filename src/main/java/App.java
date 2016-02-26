@@ -54,5 +54,13 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    post("/clear", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Client.deleteAll();
+      Stylist.deleteAll();
+      model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
   }
 }
