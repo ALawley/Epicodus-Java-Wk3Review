@@ -1,5 +1,6 @@
 import org.fluentlenium.adapter.FluentTest;
 import org.junit.ClassRule;
+import org.junit.*;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -12,6 +13,9 @@ public class AppTest extends FluentTest {
       return webDriver;
   }
 
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
+
   @ClassRule
   public static ServerRule server = new ServerRule();
 
@@ -19,5 +23,13 @@ public class AppTest extends FluentTest {
   public void rootTest() {
     goTo("http://localhost:4567/");
     assertThat(pageSource()).contains("Are you a stylist or a client?");
+  }
+
+  @Test
+  public void stylistDisplayTest() {
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    goTo("http://localhost:4567/stylist");
+    assertThat(pageSource()).contains("Erika");
   }
 }
