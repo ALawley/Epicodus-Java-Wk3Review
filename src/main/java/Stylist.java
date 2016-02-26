@@ -65,6 +65,35 @@ public class Stylist {
   }
 
   //UPDATE
+  public void updateName(String newName) {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE stylists SET name = :newName WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("newName", newName)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
+  public void updateAvailability(int newAvailability) {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE stylists SET availability = :newAvailability WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("newAvailability", newAvailability)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
+  public void updateServices(int newServices) {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE stylists SET services = :newServices WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("newServices", newServices)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
 
 
   public static Stylist find(int id) {

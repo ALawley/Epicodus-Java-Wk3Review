@@ -21,6 +21,33 @@ public class StylistTest {
   }
 
   @Test
+  public void updateName_changesStylistName() {
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    testStylist.updateName("Jonathan");
+    Stylist savedStylist = Stylist.find(testStylist.getId());
+    assertEquals("Jonathan", savedStylist.getName());
+  }
+
+  @Test
+  public void updateAvailability_changesStylistAvailability() {
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    testStylist.updateAvailability(19);
+    Stylist savedStylist = Stylist.find(testStylist.getId());
+    assertEquals(19, savedStylist.getAvailability());
+  }
+
+  @Test
+  public void updateServices_changesStylistServices() {
+    Stylist testStylist = new Stylist("Erika", 18, 3);
+    testStylist.save();
+    testStylist.updateServices(2);
+    Stylist savedStylist = Stylist.find(testStylist.getId());
+    assertEquals(2, savedStylist.getServices());
+  }
+
+  @Test
   public void find_getStylistById() {
     Stylist testStylist = new Stylist("Erika", 18, 3);
     testStylist.save();
