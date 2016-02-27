@@ -11,7 +11,13 @@
 <h3>Here is a list of all your clients:</h3>
 <ul>
   #foreach($client in $clients)
-    <li>$client.getName() - Requesting $client.serviceMatchPrint($stylist.getId()) on $client.availabilityMatchPrint($stylist.getId()). Phone: $client.getPhone()</li>
+    #if($client.serviceMatchPrint($stylist.getId()) == "")
+      <li>$client.getName() has booked you, but it looks like their needs and schedule are no longer a good match for you. Call them ASAP at $client.getPhone() to cancel.</li>
+    #elseif($client.availabilityMatchPrint($stylist.getId()) == "")
+      <li>$client.getName() has booked you, but it looks like their needs and schedule are no longer a good match for you. Call them ASAP at $client.getPhone() to cancel.</li>
+    #else
+      <li>$client.getName() - Requesting $client.serviceMatchPrint($stylist.getId()) on $client.availabilityMatchPrint($stylist.getId()). Phone: $client.getPhone()</li>
+    #end
   #end
 </ul>
 #else
