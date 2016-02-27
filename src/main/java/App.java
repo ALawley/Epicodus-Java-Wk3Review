@@ -86,6 +86,10 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       int id = Integer.parseInt(request.params(":id"));
       Client newClient = Client.find(Integer.parseInt(request.params(":id")));
+      if (newClient.getStylistId() > 0) {
+        Stylist bookedStylist = Stylist.find(newClient.getStylistId());
+        model.put("bookedStylist", bookedStylist);
+      }
       model.put("id", id);
       model.put("client", newClient);
       model.put("matchedstylists", newClient.getStylistMatches());
@@ -99,7 +103,50 @@ public class App {
       int stylistId = Integer.parseInt(request.params(":id2"));
       Client newClient = Client.find(Integer.parseInt(request.params(":id")));
       newClient.addStylist(stylistId);
+      if (newClient.getStylistId() > 0) {
+        Stylist bookedStylist = Stylist.find(newClient.getStylistId());
+        model.put("bookedStylist", bookedStylist);
+      }
       model.put("id", clientId);
+      model.put("client", newClient);
+      model.put("matchedstylists", newClient.getStylistMatches());
+      model.put("template", "templates/client.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/clients/:id/update", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params(":id"));
+      Client newClient = Client.find(Integer.parseInt(request.params(":id")));
+      model.put("id", id);
+      model.put("client", newClient);
+      model.put("template", "templates/client-update.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/clients/:id/update", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int availabilityValue = 0;
+      int servicesValue = 0;
+      String[] availabilities = request.queryParamsValues("availability");
+      for (String availability : availabilities) {
+        availabilityValue += Integer.parseInt(availability);
+      }
+      String[] services = request.queryParamsValues("service");
+      for (String service : services) {
+        servicesValue += Integer.parseInt(service);
+      }
+      String clientName = request.queryParams("name");
+      String clientPhone = request.queryParams("phone");
+      Client newClient = Client.find(Integer.parseInt(request.params(":id")));
+      newClient.updateName(clientName);
+      newClient.updateAvailability(availabilityValue);
+      newClient.updateServices(servicesValue);
+      newClient.updatePhone(clientPhone);
+      if (newClient.getStylistId() > 0) {
+        Stylist bookedStylist = Stylist.find(newClient.getStylistId());
+        model.put("bookedStylist", bookedStylist);
+      }
       model.put("client", newClient);
       model.put("matchedstylists", newClient.getStylistMatches());
       model.put("template", "templates/client.vtl");
