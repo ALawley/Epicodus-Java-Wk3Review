@@ -47,7 +47,43 @@ public class App {
       int id = Integer.parseInt(request.params(":id"));
       Stylist newStylist = Stylist.find(Integer.parseInt(request.params(":id")));
       List<Client> clients = newStylist.getClients();
+      model.put("id", id);
+      model.put("stylist", newStylist);
+      model.put("clients", clients);
+      model.put("template", "templates/stylist.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
+    get("/stylists/:id/update", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params(":id"));
+      Stylist newStylist = Stylist.find(Integer.parseInt(request.params(":id")));
+      model.put("id", id);
+      model.put("stylist", newStylist);
+      model.put("template", "templates/stylist-update.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/stylists/:id/update", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params(":id"));
+      int availabilityValue = 0;
+      int servicesValue = 0;
+      String[] availabilities = request.queryParamsValues("availability");
+      for (String availability : availabilities) {
+        availabilityValue += Integer.parseInt(availability);
+      }
+      String[] services = request.queryParamsValues("service");
+      for (String service : services) {
+        servicesValue += Integer.parseInt(service);
+      }
+      String stylistName = request.queryParams("name");
+      Stylist newStylist = Stylist.find(Integer.parseInt(request.params(":id")));
+      newStylist.updateName(stylistName);
+      newStylist.updateAvailability(availabilityValue);
+      newStylist.updateServices(servicesValue);
+      List<Client> clients = newStylist.getClients();
+      model.put("id", id);
       model.put("stylist", newStylist);
       model.put("clients", clients);
       model.put("template", "templates/stylist.vtl");
